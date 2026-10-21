@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from "react-native";
 
-import { colors, radius } from "@/theme";
+import { colors, ms, radius } from "@/theme";
 
 import { Icon, IconName } from "./Icon";
 
@@ -35,13 +35,15 @@ export function IconButton({
   icon,
   onPress,
   variant = "plain",
-  size = 44,
+  size: baseSize = 44,
   iconSize = 22,
   color,
   dot,
   style,
   accessibilityLabel,
 }: IconButtonProps) {
+  const size = ms(baseSize);
+
   return (
     <Pressable
       onPress={onPress}
@@ -67,10 +69,7 @@ export function IconButton({
 }
 
 const styles = StyleSheet.create({
-  base: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  base: { alignItems: "center", justifyContent: "center" },
   pressed: { opacity: 0.7 },
   dot: {
     position: "absolute",

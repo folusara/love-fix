@@ -1,3 +1,5 @@
+import { ms, screenFraction } from "./scale";
+
 export const colors = {
   bg: "#050509",
   surface: "#13132A",
@@ -29,23 +31,23 @@ export const gradients = {
 };
 
 export const spacing = {
-  xxs: 2,
-  xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 20,
-  xxl: 24,
-  xxxl: 32,
-  huge: 48,
+  xxs: ms(2),
+  xs: ms(4),
+  sm: ms(8),
+  md: ms(12),
+  lg: ms(16),
+  xl: ms(20),
+  xxl: ms(24),
+  xxxl: ms(32),
+  huge: ms(48),
 } as const;
 
 export const radius = {
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 20,
-  xxl: 28,
+  sm: ms(8),
+  md: ms(12),
+  lg: ms(16),
+  xl: ms(20),
+  xxl: ms(28),
   pill: 999,
 } as const;
 
@@ -59,19 +61,77 @@ export const fonts = {
 } as const;
 
 export const typography = {
-  display: { fontFamily: fonts.serifHeavy, fontSize: 36, lineHeight: 42 },
-  h1: { fontFamily: fonts.serif, fontSize: 30, lineHeight: 36 },
-  h2: { fontFamily: fonts.serif, fontSize: 24, lineHeight: 30 },
-  h3: { fontFamily: fonts.serif, fontSize: 19, lineHeight: 25 },
-  number: { fontFamily: fonts.serif, fontSize: 30, lineHeight: 36 },
-  title: { fontFamily: fonts.sansSemiBold, fontSize: 16, lineHeight: 22 },
-  button: { fontFamily: fonts.sansSemiBold, fontSize: 16, lineHeight: 20 },
-  body: { fontFamily: fonts.sans, fontSize: 15, lineHeight: 23 },
-  bodyMedium: { fontFamily: fonts.sansMedium, fontSize: 15, lineHeight: 22 },
-  caption: { fontFamily: fonts.sans, fontSize: 13, lineHeight: 18 },
-  label: { fontFamily: fonts.sansSemiBold, fontSize: 13, lineHeight: 17 },
-  micro: { fontFamily: fonts.sansSemiBold, fontSize: 11, lineHeight: 14 },
+  display: {
+    fontFamily: fonts.serifHeavy,
+    fontSize: ms(36, 0.3),
+    lineHeight: ms(42, 0.3),
+  },
+  h1: {
+    fontFamily: fonts.serif,
+    fontSize: ms(30, 0.3),
+    lineHeight: ms(36, 0.3),
+  },
+  h2: {
+    fontFamily: fonts.serif,
+    fontSize: ms(24, 0.3),
+    lineHeight: ms(30, 0.3),
+  },
+  h3: {
+    fontFamily: fonts.serif,
+    fontSize: ms(19, 0.3),
+    lineHeight: ms(25, 0.3),
+  },
+  number: {
+    fontFamily: fonts.serif,
+    fontSize: ms(30, 0.3),
+    lineHeight: ms(36, 0.3),
+  },
+  title: {
+    fontFamily: fonts.sansSemiBold,
+    fontSize: ms(16, 0.3),
+    lineHeight: ms(22, 0.3),
+  },
+  button: {
+    fontFamily: fonts.sansSemiBold,
+    fontSize: ms(16, 0.3),
+    lineHeight: ms(20, 0.3),
+  },
+  body: {
+    fontFamily: fonts.sans,
+    fontSize: ms(15, 0.3),
+    lineHeight: ms(23, 0.3),
+  },
+  bodyMedium: {
+    fontFamily: fonts.sansMedium,
+    fontSize: ms(15, 0.3),
+    lineHeight: ms(22, 0.3),
+  },
+  caption: {
+    fontFamily: fonts.sans,
+    fontSize: ms(13, 0.3),
+    lineHeight: ms(18, 0.3),
+  },
+  label: {
+    fontFamily: fonts.sansSemiBold,
+    fontSize: ms(13, 0.3),
+    lineHeight: ms(17, 0.3),
+  },
+  micro: {
+    fontFamily: fonts.sansSemiBold,
+    fontSize: ms(11, 0.3),
+    lineHeight: ms(14, 0.3),
+  },
 } as const;
+
+/** Layout dimensions that must adapt to screen size, not just density */
+export const layout = {
+  heroHeight: screenFraction(0.74, 520, 680),
+  detailHeroHeight: screenFraction(0.52, 360, 480),
+  railCardWidth: ms(140),
+  headerControl: ms(46),
+} as const;
+
+export { hs, ms, screenFraction, vs } from "./scale";
 
 export type ColorToken = keyof typeof colors;
 export type TypographyVariant = keyof typeof typography;

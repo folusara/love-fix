@@ -9,7 +9,7 @@ import {
 
 import { LinearGradient } from "expo-linear-gradient";
 
-import { colors, gradients, radius, spacing } from "@/theme";
+import { colors, gradients, ms, radius, spacing } from "@/theme";
 
 import { AppText } from "./AppText";
 import { GradientText } from "./GradientText";
@@ -39,7 +39,7 @@ interface ButtonProps {
   style?: StyleProp<ViewStyle>;
 }
 
-const HEIGHT: Record<Size, number> = { sm: 40, md: 52, lg: 58 };
+const HEIGHT: Record<Size, number> = { sm: ms(40), md: ms(52), lg: ms(58) };
 
 const VARIANT: Record<
   Exclude<Variant, "gradientOutline">,
@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.xl,
   },
   row: { flexDirection: "row", gap: spacing.md },
-  large: { fontSize: 19 },
-  sans: { fontFamily: "Inter_700Bold", fontSize: 20 },
+  large: { fontSize: ms(19, 0.3) },
+  sans: { fontFamily: "Inter_700Bold", fontSize: ms(20, 0.3) },
   glow: {
     shadowColor: colors.primary,
     shadowOpacity: 0.45,
