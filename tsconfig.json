@@ -2,19 +2,15 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "skipLibCheck": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/assets/*": [
-        "./assets/*"
-      ]
+      "@/assets/*": ["./assets/*"],
+      "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
+  "exclude": ["node_modules"]
 }

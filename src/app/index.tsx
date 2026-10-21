@@ -1,98 +1,60 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, View } from 'react-native';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { Screen } from '@/components/layout';
+import { AppText, Button, Card, Chip, Divider, GradientText, Logo } from '@/components/ui';
+import { nav } from '@/state/navigation';
+import { spacing } from '@/theme';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
+// Welcome / sign-in. All providers are mocked and route straight into the app.
+export default function WelcomeScreen() {
     return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
+        <Screen background="glow" edges={['top', 'bottom']} contentStyle={styles.content}>
+            <View style={styles.logo}>
+                <Logo size={56} withWordmark />
+            </View>
+
+            <View style={styles.hero}>
+                <GradientText variant="display" align="center">
+                    Your next obsession starts here.
+                </GradientText>
+                <AppText variant="body" color="textMuted" align="center">
+                    Dive into premium short-form romances.
+                </AppText>
+            </View>
+
+            <Card padding={spacing.xxl} style={styles.card}>
+                <Button title="Continue with Google" icon="google" variant="secondary" pill={false} onPress={nav.enterApp} />
+                <Button title="Continue with Apple" icon="apple" variant="secondary" pill={false} onPress={nav.enterApp} />
+                <Divider label="or" />
+                <Button title="Continue with email" icon="mail" size="lg" onPress={nav.enterApp} />
+                <AppText variant="bodyMedium" color="textMuted" align="center">
+                    New here?{' '}
+                    <AppText variant="bodyMedium" color="primary" onPress={nav.enterApp}>
+                        Create account
+                    </AppText>
+                </AppText>
+                <View style={styles.legal}>
+                    <AppText variant="caption" color="textSubtle">
+                        Terms
+                    </AppText>
+                    <AppText variant="caption" color="textSubtle">
+                        Privacy
+                    </AppText>
+                </View>
+            </Card>
+
+            <View style={styles.trust}>
+                <Chip label="Secure and encrypted" variant="glass" icon="shield" />
+            </View>
+        </Screen>
     );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
+    content: { flexGrow: 1, justifyContent: 'space-between', paddingTop: spacing.xxl, gap: spacing.xxxl },
+    logo: { alignItems: 'center' },
+    hero: { gap: spacing.md, paddingHorizontal: spacing.md },
+    card: { gap: spacing.lg },
+    legal: { flexDirection: 'row', justifyContent: 'center', gap: spacing.xxl },
+    trust: { alignItems: 'center' }
 });
